@@ -2,40 +2,26 @@ body {
   background-color: #f2f2f2;
 }
 
-.nav {
-  border-radius: 25px;
-  background-color: #ff3300;
-  color: #f2f2f2;
-  padding: 20px;
-  position: fixed; /* Set the navbar to fixed position */
-  float: left; /* Position the navbar at the left of the page */
-  width: 25%; /* 25% of the page's width */
-  height: 92.5%; /* Full height */
-  overflow: hidden;
+.top-bar{
+  background-color: #e11d1e;
+  height: 80px
 }
 
-#selector-text {
-  color: #ffffff;
-  text-align: center;
-  font-family: 'Lato', sans-serif;
-  font-size: 24px;
-  font-weight: 300;
+.p1{
+  display: inline-block;
+  float: left;
+  vertical-align: middle;
+  height: 100%;
+  width: 15%;
+  padding-left: 20px;
+  padding-bottom: 20px;
+  font-size: 25px;
+  color: white;
 }
 
-select {
-    border: none;
-    display: block;
-    margin: 0 auto;
-    border-radius: 4px;
-    background-color: #f1f1f1;
-}
+.form1{
+  display: block;
+  width: 70%;
+  padding-top: 32px;
 
-.table-sem-one {
-  float: right;
-  width: auto;
-
-}
-
-.table-sem-two {
-  float: right;
 }
