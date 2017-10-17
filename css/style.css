@@ -2,8 +2,58 @@ body {
   background-color: #f2f2f2;
 }
 
+.p2 {
+  text-align: left;
+  margin-left: 8px;
+  font-family: georgia;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+caption {
+  text-align: left;
+  margin-left: 6px;
+  font-family: georgia;
+  font-size: 18px;
+  font-weight: bold;
+  /*padding-top: 60px;*/
+}
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  font-weight: normal;
+  padding: 5px;
+  font-family: georgia;
+  font-size: 15px;
+  text-align: left;
+  border-bottom: 1px solid #9b9b9b;
+  border-collapse: collapse;
+}
+
+.core-modules-table1 {
+  padding-bottom: 60px;
+}
+
+.compulsory-modules-table1 {
+  padding-bottom: 60px;
+}
+
+.optional-modules-table1 {
+  padding-bottom: 60px;
+}
+
+
+
+
+
+
+
 .top-bar{
-  background-color: #e11d1e;
+  background-color: #e2231a;
   height: 80px
 }
 
@@ -13,9 +63,11 @@ body {
   vertical-align: middle;
   height: 100%;
   width: 15%;
-  padding-left: 20px;
-  padding-bottom: 20px;
-  font-size: 25px;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 5px;
+  font-family: georgia;
+  font-size: 22px;
   color: white;
 }
 
@@ -23,5 +75,23 @@ body {
   display: block;
   width: 70%;
   padding-top: 32px;
+}
 
+
+.semester-one{
+  padding-left: 200px;
+  padding-top: 90px;
+  background-color: #f2f2f2;
+  height: 80px;
+}
+
+/* hover styling */
+.core-modules-table1 tr:not(:nth-child(1)):hover {
+  background-color: #fc5e72;
+}
+.compulsory-modules-table1 tr:not(:nth-child(1)):hover {
+  background-color: #fc5e72;
+}
+.optional-modules-table1 tr:not(:nth-child(1)):hover {
+  background-color: #fc5e72;
 }
