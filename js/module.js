@@ -1,6 +1,6 @@
 class Module
 {
-	let moduleCode;
+	/*let moduleCode;
 	let moduleName;
 	let elementId;
 	let creditValue;
@@ -8,7 +8,7 @@ class Module
 	let isIs;
 	let isSe;
 	let isAi;
-	let selected = false;
+	let selected = false;*/
 
 	constructor(moduleCode, moduleName, elementId, creditValue, isPcc, isIs, isSe, isAi){
 		this.moduleCode = moduleCode;
@@ -19,5 +19,6 @@ class Module
 		this.isIs = isIs;
 		this.isSe = isSe;
 		this.isAi = isAi;
+		this.selected = false;
 	}
 }
