@@ -3,7 +3,6 @@ body {
 }
 
 .p2 {
-  text-align: left;
   margin-left: 8px;
   font-family: georgia;
   font-size: 25px;
@@ -40,15 +39,13 @@ add a class in css to hover so its solid when selected
 
 top bar stays on screen when scrolling
 
-pop up, for description
-
 css class for when its hidden and when its not hidden
 
 second row for each row in the table, set the second one to invisible for when its not selected
 
 background image?
 
-+ & - buttons in a column of table to add to table
++ & - buttons in a column of table to show description
 
 merge changes
 
@@ -58,6 +55,9 @@ some full year modules
 
 
 
+.hidden tr:not(:nth-child(1)) {
+  background-color: #CDD7DC;
+}
 
 
 
