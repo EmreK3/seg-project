@@ -54,9 +54,20 @@ some full year modules
 */
 
 
+.collapse {
+  background-color: #ee2d25;
+}
 
-.hidden tr:not(:nth-child(1)) {
+.expand {
+  background-color: #ee2d25;
+}
+
+.selected tr:not(:nth-child(1)) {
   background-color: #CDD7DC;
+}
+
+.hidden {
+  display: none;
 }
 
 
