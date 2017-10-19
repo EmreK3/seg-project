@@ -6,8 +6,9 @@ body {
   text-align: left;
   margin-left: 8px;
   font-family: georgia;
-  font-size: 20px;
+  font-size: 25px;
   font-weight: bold;
+  padding-right: 900px;
 }
 
 caption {
@@ -16,12 +17,12 @@ caption {
   font-family: georgia;
   font-size: 18px;
   font-weight: bold;
-  /*padding-top: 60px;*/
 }
 
-.table {
+table {
   border-collapse: collapse;
   width: 100%;
+  margin-bottom: 60px;
 }
 
 th, td {
@@ -34,17 +35,26 @@ th, td {
   border-collapse: collapse;
 }
 
-.core-modules-table1 {
-  padding-bottom: 60px;
-}
+/*
+add a class in css to hover so its solid when selected
 
-.compulsory-modules-table1 {
-  padding-bottom: 60px;
-}
+top bar stays on screen when scrolling
 
-.optional-modules-table1 {
-  padding-bottom: 60px;
-}
+pop up, for description
+
+css class for when its hidden and when its not hidden
+
+second row for each row in the table, set the second one to invisible for when its not selected
+
+background image?
+
++ & - buttons in a column of table to add to table
+
+merge changes
+
+some full year modules
+
+*/
 
 
 
@@ -53,7 +63,7 @@ th, td {
 
 
 .top-bar{
-  background-color: #e2231a;
+  background-color: #ee2d25;
   height: 80px
 }
 
@@ -80,18 +90,18 @@ th, td {
 
 .semester-one{
   padding-left: 200px;
-  padding-top: 90px;
+  padding-top: 10px;
   background-color: #f2f2f2;
   height: 80px;
 }
 
 /* hover styling */
 .core-modules-table1 tr:not(:nth-child(1)):hover {
-  background-color: #fc5e72;
+  background-color: #CDD7DC;
 }
 .compulsory-modules-table1 tr:not(:nth-child(1)):hover {
-  background-color: #fc5e72;
+  background-color: #CDD7DC;
 }
 .optional-modules-table1 tr:not(:nth-child(1)):hover {
-  background-color: #fc5e72;
+  background-color: #CDD7DC;
 }
