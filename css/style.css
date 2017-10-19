@@ -54,7 +54,7 @@ some full year modules
 
 */
 
-.selected tr:not(:nth-child(1)) {
+.selected{
   background-color: #CDD7DC;
 }
 
