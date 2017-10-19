@@ -8,6 +8,7 @@ body {
   font-size: 25px;
   font-weight: bold;
   padding-right: 900px;
+  width: 100%;
 }
 
 caption {
@@ -53,15 +54,6 @@ some full year modules
 
 */
 
-
-.collapse {
-  background-color: #ee2d25;
-}
-
-.expand {
-  background-color: #ee2d25;
-}
-
 .selected tr:not(:nth-child(1)) {
   background-color: #CDD7DC;
 }
@@ -104,6 +96,8 @@ some full year modules
   padding-top: 10px;
   background-color: #f2f2f2;
   height: 80px;
+  width: 70%;
+  float: right;
 }
 
 /* hover styling */
@@ -116,3 +110,4 @@ some full year modules
 .optional-modules-table1 tr:not(:nth-child(1)):hover {
   background-color: #CDD7DC;
 }
+
