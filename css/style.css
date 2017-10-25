@@ -58,6 +58,10 @@ some full year modules
   background-color: #CDD7DC;
 }
 
+.locked{
+  background-color: #AAAAAA;
+}
+
 .hidden {
   display: none;
 }

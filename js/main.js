@@ -1,18 +1,28 @@
 let modules = [
-	new Module("6CCS3PRJ", "Individual Project", "6CCS3PRJ", 30, false, false, false, false),
-	new Module("6CCS3AMS", "Agents and Multi-Agent Systems", "6CCS3AMS", 15, false, false, false, true),
-	new Module("6CCS3CFL", "Compiler and Formal Languages", "6CCS3CFL", 15, true, false, true, false),
-	new Module("6CCS3COV", "Computer Vision", "6CCS3COV", 15, false, false, false, true),
-	new Module("6CCS3CSL", "Computer Science Logic", "6CCS3CSL", 15, false, false, false, false),
-	new Module("6CCS3HCI", "Human-Computer Interaction", "6CCS3HCI", 15, false, false, true, false),
-	new Module("6CCS3VER", "Formal Verification", "6CCS3VER", 15, false, false, true, false),
-	new Module("6CCS3WSN", "Algorithms for the World Wide Web and Social Networks", "6CCS3WSN", 15, false, false, true, false),
-	new Module("6CCS3SMT", "Software Measurement and Testing", "6CCS3SMT", 15, false, false, true, false),
-	new Module("6CCS3GRS", "Computer Graphics Systems", "6CCS3GRS", 15, false, true, false, false),
-	new Module("6CCS3PAL", "Parallel Algorithms", "6CCS3PAL", 15, true, true, true, false),
-	new Module("6CCS3AIN", "Artificial Intelligence", "6CCS3AIN", 15, false, false, false, true),
-	new Module("6CCS3CIS", "Cryptography and Information Security", "6CCS3CIS", 15, false, false, false, true),
-	new Module("6CCS3AIP", "Artificial Intelligence Planning", "6CCS3AIP", 15, false, false, false, true),
+	new Module("6CCS3PRJ", "Individual Project", 30, false, false, false, false),
+	new Module("6CCS3AMS", "Agents and Multi-Agent Systems", 15, false, false, false, true),
+	new Module("6CCS3CFL", "Compiler and Formal Languages", 15, true, false, true, false),
+	new Module("6CCS3COV", "Computer Vision", 15, false, false, false, true),
+	new Module("6CCS3CSL", "Computer Science Logic", 15, false, false, false, false),
+	new Module("6CCS3HCI", "Human-Computer Interaction", 15, false, false, true, false),
+	new Module("6CCS3VER", "Formal Verification", 15, false, false, true, false),
+	new Module("6CCS3WSN", "Algorithms for the World Wide Web and Social Networks", 15, false, false, true, false),
+	new Module("6CCS3SMT", "Software Measurement and Testing",  15, false, false, true, false),
+	new Module("6CCS3GRS", "Computer Graphics Systems",  15, false, true, false, false),
+	new Module("6CCS3PAL", "Parallel Algorithms", 15, true, true, true, false),
+	new Module("6CCS3AIN", "Artificial Intelligence", 15, false, false, false, true),
+	new Module("6CCS3CIS", "Cryptography and Information Security", 15, false, false, false, true),
+	new Module("6CCS3AIP", "Artificial Intelligence Planning", 15, false, false, false, true),
+	new Module("6CCS3DSM", "Distributed Systems",15,false,false,true,false),
+	new Module("6CCS3COM", "Computational Models",15,false,false,false,false),
+	new Module("6CCS3SAD", "Software Architecture and Design",15,false,true,false,false),
+	new Module("6CCS3SIA", "Software Engineering of Internet Applications",15,false,true,false,false),
+	new Module("6CCS3NSE", "Network Security",15,false,true,false,false),
+	new Module("6CCS3OME", "Optimisation Methods",15,false,false,false,true),
+	new Module("6CCS3PRE", "Pattern Recognition",15,false,false,false,true),
+	new Module("6CCS3TSP", "Text Searching and Processing",15,false,false,false,false),
+	new Module("6SSMN325", "Business Management",15,false,false,false,false),
+	new Module("6SSMN339", "Human Resource Management",15,false,false,false,false)
 ];
 
 let management = false;
@@ -42,39 +52,118 @@ function calculateTotalCredits()
 	return total;
 }
 
+function setModuleListeners()
+{
+	modules.forEach(function(module)
+	{
+		if(module.locked == false){
+			$("#" + module.moduleCode + "> td.expand").click(function(e)
+			{
+				e.stopPropagation();
+				console.log("Toggled " + module.moduleCode + " Description");
+				//If clicked toggle description and button
+				if($("#" + module.moduleCode + "> td.expand").text() == "+")
+				{
+					$("#" + module.moduleCode + "> td.expand").text("-");
+					$("#" + module.moduleCode + "_description").removeClass("hidden");
+				}else
+				{
+					$("#" + module.moduleCode + "> td.expand").text("+");
+					$("#" + module.moduleCode + "_description").addClass("hidden");
+				}
+			});
+
+			$("#" + module.moduleCode).click(function()
+			{
+				//console.log("Toggled " + module.moduleCode);
+				//If clicked mark the module as selected
+				toggleModule(module);
+				//printSelectedModules();
+			});
+		}
+	});
+
+}
+
+function toggleModule(module)
+{
+	$("#" + module.moduleCode).toggleClass("selected");
+	$("#" + module.moduleCode + "_description").toggleClass("selected");
+	module.selected = !module.selected;
+}
+
+function lockModule(module)
+{
+	$("#" + module.moduleCode).addClass("locked");
+	$("#" + module.moduleCode + "_description").addClass("locked");
+	module.selected = !module.selected;
+}
+
+function resetAllModules()
+{
+	modules.forEach(function(module)
+	{
+		$("#" + module.moduleCode).removeClass("selected");
+		$("#" + module.moduleCode + "_description").removeClass("selected");
+		$("#" + module.moduleCode).removeClass("locked");
+		$("#" + module.moduleCode + "_description").removeClass("locked");
+		module.selected = false;
+		module.locked = false;
+	});
+}
+
+function lockAndSelectModules(selectedModules, lockedModules)
+{
+	selectedModules.forEach(function(moduleCode)
+	{
+		//console.log("Selecting Module " + moduleCode);
+		module = modules.find(function(element)
+		{
+			return element.moduleCode == moduleCode;
+		});
+		toggleModule(module);
+		module.locked = true;
+	});
+
+	lockedModules.forEach(function(moduleCode)
+	{
+		//console.log("Locking Module " + moduleCode);
+		module = modules.find(function(element)
+		{
+			return element.moduleCode == moduleCode;
+		});
+
+		lockModule(module);
+		module.selected = false;
+		module.locked = true;
+	});
+}
+
 $(document).ready(function()
 {
 	console.log("Ready!");
-	modules.forEach(function(module)
+	//Check for course selection
+
+	$("#courseSelection").on("change", function()
 	{
+		console.log($("#courseSelection").val());
+		resetAllModules();
 
-		$("#" + module.elementId + "> td.expand").click(function(e)
+		if($("#courseSelection").val() == "cs")
 		{
-			e.stopPropagation();
-			console.log("Toggled " + module.moduleCode + " Description");
-			//If clicked toggle description and button
-			if($("#" + module.elementId + "> td.expand").text() == "+")
-			{
-				$("#" + module.elementId + "> td.expand").text("-");
-				$("#" + module.elementId + "_description").removeClass("hidden");
-			}else
-			{
-				$("#" + module.elementId + "> td.expand").text("+");
-				$("#" + module.elementId + "_description").addClass("hidden");
-			}
-		});
+			let selectedModules = ["6CCS3PRJ"];
+			let lockedModules = ["6SSMN325", "6SSMN339"];
 
-		$("#" + module.elementId).click(function()
+			lockAndSelectModules(selectedModules, lockedModules);
+
+		}else if($("#courseSelection").val() == "cswm")
 		{
-			console.log("Toggled " + module.moduleCode);
-			//If clicked mark the module as selected
-			$("#" + module.elementId).toggleClass("selected");
-			$("#" + module.elementId + "_description").toggleClass("selected");
-			module.selected = !module.selected;
-			printSelectedModules();
-		});
+			let selectedModules = ["6CCS3PRJ", "6SSMN325", "6SSMN339"];
+			let lockedModules = [];
 
+			lockAndSelectModules(selectedModules, lockedModules);
+		}
 
-
-	});
+		setModuleListeners();
+	})
 })
