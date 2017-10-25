@@ -65,6 +65,7 @@ some full year modules
 
 
 
+
 .top-bar{
   background-color: #ee2d25;
   height: 80px
@@ -101,13 +102,6 @@ some full year modules
 }
 
 /* hover styling */
-.core-modules-table1 tr:not(:nth-child(1)):hover {
+.module-table tr:hover:not(:nth-child(2n-1)) {
   background-color: #CDD7DC;
 }
-.compulsory-modules-table1 tr:not(:nth-child(1)):hover {
-  background-color: #CDD7DC;
-}
-.optional-modules-table1 tr:not(:nth-child(1)):hover {
-  background-color: #CDD7DC;
-}
-

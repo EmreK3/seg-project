@@ -35,7 +35,7 @@ function calculateTotalCredits()
 	{
 		if(module.selected == true)
 		{
-			total += module.creditValue; 
+			total += module.creditValue;
 		}
 	});
 
@@ -48,17 +48,18 @@ $(document).ready(function()
 	modules.forEach(function(module)
 	{
 
-		$("#" + module.elementId + "_description").click(function()
+		$("#" + module.elementId + "> td.expand").click(function(e)
 		{
-			console.log("Opened " + module.moduleCode + " Description");
+			e.stopPropagation();
+			console.log("Toggled " + module.moduleCode + " Description");
 			//If clicked toggle description and button
-			if($("#" + module.elementId + "_description").text() == "+")
+			if($("#" + module.elementId + "> td.expand").text() == "+")
 			{
-				$("#" + module.elementId + "_description").text("-");
+				$("#" + module.elementId + "> td.expand").text("-");
 				$("#" + module.elementId + "_description").removeClass("hidden");
 			}else
 			{
-				$("#" + module.elementId + "_description").text("+");
+				$("#" + module.elementId + "> td.expand").text("+");
 				$("#" + module.elementId + "_description").addClass("hidden");
 			}
 		});
@@ -68,11 +69,12 @@ $(document).ready(function()
 			console.log("Toggled " + module.moduleCode);
 			//If clicked mark the module as selected
 			$("#" + module.elementId).toggleClass("selected");
+			$("#" + module.elementId + "_description").toggleClass("selected");
 			module.selected = !module.selected;
 			printSelectedModules();
 		});
 
-		
+
 
 	});
 })
