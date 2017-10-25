@@ -7,7 +7,6 @@ body {
   font-family: georgia;
   font-size: 25px;
   font-weight: bold;
-  padding-right: 900px;
   width: 100%;
 }
 
@@ -65,9 +64,27 @@ some full year modules
 
 
 
-.top-bar{
+.top-bar {
   background-color: #ee2d25;
-  height: 80px
+  height: 80px;
+}
+
+.selected-bar {
+  height: 100%;
+  width: 28%;
+  position:absolute;
+}
+
+.selected-table {
+  background-color: #ee2d25;
+  color: white;
+  position: fixed;
+  width: 28%;
+  height: 88%;
+}
+
+.selected-table th {
+  border-bottom: 1px solid white;
 }
 
 .p1{
@@ -92,7 +109,6 @@ some full year modules
 
 
 .semester-one{
-  padding-left: 200px;
   padding-top: 10px;
   background-color: #f2f2f2;
   height: 80px;
@@ -110,4 +126,3 @@ some full year modules
 .optional-modules-table1 tr:not(:nth-child(1)):hover {
   background-color: #CDD7DC;
 }
-
