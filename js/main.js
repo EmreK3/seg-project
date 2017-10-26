@@ -38,65 +38,144 @@ function printSelectedModules()
 	});
 }
 
-function calculateTotalCredits()
+function calculateSummary()
 {
+	//Select Modules and find degree title
 	let total = 0;
+	let pccTotal = 0;
+	let isTotal = 0;
+	let seTotal = 0;
+	let aiTotal = 0;
 	modules.forEach(function(module)
 	{
 		if(module.selected == true)
 		{
 			total += module.creditValue;
+			if(module.isPcc)
+			{
+				pccTotal ++;
+			}
+			if(module.isIs)
+			{
+				isTotal ++;
+			}
+			if(module.isSe)
+			{
+				seTotal ++;
+			}
+			if(module.isAi)
+			{
+				aiTotal ++;
+			}
 		}
 	});
 
-	return total;
+	//Calculate Degree titles
+	let baseDegreeTitle = "";
+
+	if($("#courseSelection").val() == "cs")
+	{
+		baseDegreeTitle = "BSc Computer Science";
+	}
+	else if($("#courseSelection").val() == "cswm")
+	{
+		baseDegreeTitle = "BSc Computer Science with Management";
+	}
+
+	let degreeTitles = [baseDegreeTitle];
+
+	if(pccTotal >= 4)
+	{
+		degreeTitles.append(baseDegreeTitle + " (Performance Critical Computing)");
+	}
+	if(isTotal >= 4)
+	{
+		degreeTitles.append(baseDegreeTitle + " (Internet Systems)");
+	}
+	if(seTotal >= 4)
+	{
+		degreeTitles.append(baseDegreeTitle + " (Software Engineering)");
+	}
+	if(aiTotal >= 4)
+	{
+		degreeTitles.append(baseDegreeTitle + " (Artificial Intelligence)");
+	}
+Security
+
+	//Calculate whole text
+	let summaryText = "Credit Value: " + total + "/120\n\nPossible Degree Titles:\n\n";
+	for(degreeTitle of degreeTitles)
+	{
+		summaryText += degreeTitle + "\n\n";
+	}
+
+	$("#sidebar_footer").text(summaryText);
 }
 
-function setModuleListeners()
+function setModuleAddListeners()
 {
 	modules.forEach(function(module)
 	{
 		if(module.locked == false){
-			$("#" + module.moduleCode + "> td.expand").click(function(e)
-			{
-				e.stopPropagation();
-				console.log("Toggled " + module.moduleCode + " Description");
-				//If clicked toggle description and button
-				if($("#" + module.moduleCode + "> td.expand").text() == "+")
-				{
-					$("#" + module.moduleCode + "> td.expand").text("-");
-					$("#" + module.moduleCode + "_description").removeClass("hidden");
-				}else
-				{
-					$("#" + module.moduleCode + "> td.expand").text("+");
-					$("#" + module.moduleCode + "_description").addClass("hidden");
-				}
-			});
-
 			$("#" + module.moduleCode).click(function()
 			{
 				//console.log("Toggled " + module.moduleCode);
 				//If clicked mark the module as selected
 				toggleModule(module);
 				//printSelectedModules();
+				calculateSummary();
 			});
 		}
 	});
+}
 
+function setModuleDescriptionListeners()
+{
+	modules.forEach(function(module)
+	{
+		$("#" + module.moduleCode + "> td.expand").click(function(e)
+		{
+			e.stopPropagation();
+			console.log("Toggled " + module.moduleCode + " Description");
+			//If clicked toggle description and button
+			if($("#" + module.moduleCode + "> td.expand").text() == "+")
+			{
+				$("#" + module.moduleCode + "> td.expand").text("-");
+				$("#" + module.moduleCode + "_description").removeClass("hidden");
+			}else
+			{
+				$("#" + module.moduleCode + "> td.expand").text("+");
+				$("#" + module.moduleCode + "_description").addClass("hidden");
+			}
+		});
+	});
 }
 
 function toggleModule(module)
 {
 	$("#" + module.moduleCode).toggleClass("selected");
 	$("#" + module.moduleCode + "_description").toggleClass("selected");
+	toggleModuleInSidebar(module);
 	module.selected = !module.selected;
+}
+
+function selectModule(module)
+{
+	$("#" + module.moduleCode).addClass("selected");
+	$("#" + module.moduleCode + "_description").addClass("selected");
+	if(!module.selected){
+		toggleModuleInSidebar(module);
+	}
+	module.selected = true;
 }
 
 function lockModule(module)
 {
 	$("#" + module.moduleCode).addClass("locked");
 	$("#" + module.moduleCode + "_description").addClass("locked");
-	module.selected = !module.selected;
+	//toggleModuleInSidebar(module);
+	module.selected = true;
+	module.locked = true;
 }
 
 function resetAllModules()
@@ -107,27 +186,47 @@ function resetAllModules()
 		$("#" + module.moduleCode + "_description").removeClass("selected");
 		$("#" + module.moduleCode).removeClass("locked");
 		$("#" + module.moduleCode + "_description").removeClass("locked");
+		$("#" + module.moduleCode).click(null);
+		if(module.selected)
+		{
+			toggleModuleInSidebar(module);
+		}
+
 		module.selected = false;
 		module.locked = false;
 	});
+}
+
+function toggleModuleInSidebar(module)
+{
+	if($("#" + module.moduleCode + "_sidebar").length)
+	{
+		$("#" + module.moduleCode + "_sidebar").remove();
+	}else
+	{
+		console.log("added to sidebar")
+		var moduleElement = $("<tr id=\"" + module.moduleCode +"_sidebar\"><th>" + module.moduleCode + " - " + module.moduleName + "</th></tr>");
+		$("#sidebar_modules").append(moduleElement);
+	}
 }
 
 function lockAndSelectModules(selectedModules, lockedModules)
 {
 	selectedModules.forEach(function(moduleCode)
 	{
-		//console.log("Selecting Module " + moduleCode);
+		console.log("Selecting Module " + moduleCode);
 		module = modules.find(function(element)
 		{
 			return element.moduleCode == moduleCode;
 		});
-		toggleModule(module);
+		selectModule(module);
 		module.locked = true;
+		module.selected = true;
 	});
 
 	lockedModules.forEach(function(moduleCode)
 	{
-		//console.log("Locking Module " + moduleCode);
+		console.log("Locking Module " + moduleCode);
 		module = modules.find(function(element)
 		{
 			return element.moduleCode == moduleCode;
@@ -143,7 +242,7 @@ $(document).ready(function()
 {
 	console.log("Ready!");
 	//Check for course selection
-
+	setModuleDescriptionListeners();
 	$("#courseSelection").on("change", function()
 	{
 		console.log($("#courseSelection").val());
@@ -164,6 +263,6 @@ $(document).ready(function()
 			lockAndSelectModules(selectedModules, lockedModules);
 		}
 
-		setModuleListeners();
+		setModuleAddListeners();
 	})
 })
