@@ -126,6 +126,15 @@ some full year modules
 
 .semester-one{
   padding-top: 10px;
+  margin-bottom: 1000px;
+  background-color: #f2f2f2;
+  height: 80px;
+  width: 70%;
+  float: right;
+}
+
+.semester-two{
+  padding-top: 10px;
   background-color: #f2f2f2;
   height: 80px;
   width: 70%;
