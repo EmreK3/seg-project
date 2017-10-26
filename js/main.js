@@ -100,7 +100,7 @@ function calculateSummary()
 	{
 		degreeTitles.append(baseDegreeTitle + " (Artificial Intelligence)");
 	}
-Security
+
 
 	//Calculate whole text
 	let summaryText = "Credit Value: " + total + "/120\n\nPossible Degree Titles:\n\n";
@@ -153,10 +153,15 @@ function setModuleDescriptionListeners()
 
 function toggleModule(module)
 {
+	console.log("1");
 	$("#" + module.moduleCode).toggleClass("selected");
+	console.log("2");
 	$("#" + module.moduleCode + "_description").toggleClass("selected");
+	console.log("3");
 	toggleModuleInSidebar(module);
+	console.log("4");
 	module.selected = !module.selected;
+	console.log("5");
 }
 
 function selectModule(module)
@@ -186,7 +191,7 @@ function resetAllModules()
 		$("#" + module.moduleCode + "_description").removeClass("selected");
 		$("#" + module.moduleCode).removeClass("locked");
 		$("#" + module.moduleCode + "_description").removeClass("locked");
-		$("#" + module.moduleCode).click(null);
+		$("#" + module.moduleCode).off('click');
 		if(module.selected)
 		{
 			toggleModuleInSidebar(module);
